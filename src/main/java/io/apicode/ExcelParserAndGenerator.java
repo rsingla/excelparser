@@ -1,13 +1,13 @@
 package io.apicode;
 
 import org.apache.poi.ss.usermodel.*;
-        import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-        import org.apache.poi.ss.usermodel.Cell;
-        import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
 
-        import java.io.FileInputStream;
-        import java.io.FileOutputStream;
-        import java.io.IOException;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class ExcelParserAndGenerator {
     public static void main(String[] args) {
@@ -30,8 +30,11 @@ public class ExcelParserAndGenerator {
                     Cell newCell = newRow.createCell(cellNum++);
                     switch (cell.getCellType()) {
                         case STRING:
-                            newCell.setCellValue(cell.getStringCellValue());
+                        if(cell.getStringCellValue() != null) {
+                            String value = cell.getStringCellValue();
+                            newCell.setCellValue(value.trim());
                             break;
+                        }
                         case NUMERIC:
                             newCell.setCellValue(cell.getNumericCellValue());
                             break;
